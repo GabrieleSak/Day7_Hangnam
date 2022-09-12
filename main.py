@@ -18,7 +18,7 @@ guessed_letters = []
 while "_" in display and lives > 0:
     guess = input("Guess a letter: ").lower()
     if guess in guessed_letters:
-        print(f"You've already guesses {guess}")
+        print(f"You've already guessed {guess}")
     else:
         guessed_letters += guess
         if guess in chosen_word:
