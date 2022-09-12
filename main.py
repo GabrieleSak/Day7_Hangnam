@@ -1,5 +1,64 @@
 import random
 
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+lives  = 6
+
 word_list = ["aardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 
@@ -8,14 +67,19 @@ print(f'Pssst, the solution is {chosen_word}.')
 display = []
 display += "_" * len(chosen_word)
 
-while "_" in display:
+while "_" in display and lives > 0:
     guess = input("Guess a letter: ").lower()
-
-    position = 0
-    for letter in chosen_word:
-        if guess == letter:
-            display[position] = letter
-        position += 1
-
-    print(display)
-print("You win")
+    if guess in chosen_word:
+        position = 0
+        for letter in chosen_word:
+            if guess == letter:
+                display[position] = letter
+            position += 1
+    else:
+        lives -= 1
+    print(f"{' '.join(display)}")
+    print(stages[lives])
+if lives == 0:
+    print("You lose")
+else:
+    print("You win")
